@@ -27,3 +27,5 @@ app.use("/api/content", contentRouter);
 app.use("/api/profile", profileRouter); 
 // Puerto
 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log('Server corriendo en puerto &{PORT}'));
