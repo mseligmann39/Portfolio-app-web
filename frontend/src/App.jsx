@@ -1,70 +1,79 @@
-// 1. Importa useState y useEffect desde React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import "./style.css";
+
+// Importamos todos nuestros componentes de presentación
+import Header from "./components/Header";
+import Nav from "./components/Nav";
+import Secciones from "./components/Secciones";
+import Footer from "./components/Footer";
 
 function App() {
-  // 2. Crea un estado para guardar los proyectos. Inicialmente es un array vacío.
+  // --- ESTADOS ---
+  // Gestiona el idioma actual de la aplicación
+  const [lang, setLang] = useState("es");
+  // Almacena los datos del perfil (nombre, subtítulo, etc.)
+  const [profile, setProfile] = useState(null);
+  // Almacena la lista de proyectos
   const [projects, setProjects] = useState([]);
-  const [skills, setSkills] = useState([]);
+  // Almacena todo el contenido de texto de la UI (títulos, botones, etc.)
+  const [content, setContent] = useState(null);
 
-  // 3. Usa useEffect para hacer la petición a tu API cuando el componente se monte
+  // --- PETICIONES A LA API ---
+  // Se ejecutan cada vez que el estado 'lang' cambia
   useEffect(() => {
-    // Define una función asíncrona dentro para poder usar await
-    const fetchProjects = async () => {
+    const fetchData = async () => {
       try {
-        // Pide los datos a tu backend
-        const response = await fetch('http://localhost:5000/api/projects');
-        // Convierte la respuesta a JSON
-        const data = await response.json();
-        // Actualiza el estado 'projects' con los datos recibidos
-        setProjects(data);
+        // Pedimos todos los datos en paralelo para mejorar el rendimiento
+        const [profileRes, projectsRes, contentRes] = await Promise.all([
+          fetch(`http://localhost:5000/api/profile?lang=${lang}`),
+          fetch(`http://localhost:5000/api/projects?lang=${lang}`),
+          fetch(`http://localhost:5000/api/content?lang=${lang}`),
+        ]);
+
+        // Convertimos las respuestas a JSON
+        const profileData = await profileRes.json();
+        const projectsData = await projectsRes.json();
+        const contentData = await contentRes.json();
+
+        // Actualizamos los estados con los datos recibidos
+        setProfile(profileData);
+        setProjects(projectsData);
+        setContent(contentData);
       } catch (error) {
-        console.error("Error al obtener los proyectos:", error);
+        console.error("Error al obtener los datos:", error);
       }
     };
-    // Si también necesitas las habilidades, puedes hacer otra petición aquí
-   const fetchSkills = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/skills');
-      const data = await response.json();
-      setSkills(data);
-    } catch (error) {
-      console.error("Error al obtener las habilidades:", error);
-    }
-  };
-  fetchSkills();
-    
 
-    // Llama a la función
-    fetchProjects();
-  }, []); // El array vacío asegura que este efecto se ejecute solo una vez
+    fetchData();
+  }, [lang]);
 
-  // 4. Renderiza tu componente.
-return (
-  <>
-    <div className="App">
-      <h1>Mis Proyectos</h1>
-      <div className="projects-grid">
-        {/* 5. Mapea el array de proyectos y crea un elemento por cada uno */}
-        {projects.map(project => (
-          // Usa un 'key' único para cada elemento de la lista, el _id de MongoDB es perfecto
-          <div key={project._id} className="project-card">
-            <h3>{project.emoji} {project.title}</h3>
-            <p>{project.description}</p>
-            {/* Aquí puedes mapear también las tecnologías */}
-          </div>
-        ))}
-      </div>
-    </div>
-    <section className="skills-section">
-      <h2>Habilidades</h2>
-      <ul className="skills-list">
-        {skills.map(skill => (
-          <li key={skill._id}>{skill.name}</li>
-        ))}
-      </ul>
-    </section>
-  </>
-);
+  // --- LÓGICA DERIVADA ---
+  // ¡AQUÍ ESTÁ LA MAGIA!
+  // En lugar de pedir una lista de skills a la API, la creamos dinámicamente.
+  // 1. Creamos un array con TODAS las tecnologías de TODOS los proyectos.
+  // 2. Usamos 'Set' para eliminar duplicados y obtener una lista de habilidades únicas.
+  const uniqueSkills = [...new Set(projects.flatMap((p) => p.technologies))];
+
+  // Muestra un estado de carga mientras los datos esenciales no lleguen
+  if (!profile || !content) {
+    return <div>Cargando Portfolio...</div>;
+  }
+
+  // --- RENDERIZADO ---
+  // El return es limpio: solo ensambla los componentes y les pasa los datos necesarios
+  return (
+    <>
+      <Header profile={profile} setLang={setLang} />
+      <Nav content={content} />
+      <Secciones
+        profile={profile}
+        projects={projects}
+        skills={uniqueSkills} // Le pasamos la lista de skills únicas que acabamos de crear
+        content={content}
+      />
+      <Footer content={content} profile={profile} />
+    </>
+  );
 }
 
 export default App;

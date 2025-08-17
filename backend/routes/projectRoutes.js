@@ -3,55 +3,36 @@ const router = express.Router();
 const Project = require("../models/projectModel");
 
 // Obtener todos los proyectos
+// Obtener todos los proyectos en un idioma específico
 router.get("/", async (req, res) => {
+  // Obtiene el idioma de la query string, por defecto será 'es'
+  const lang = req.query.lang || 'es';
+
   try {
+    // Busca todos los proyectos
     const projects = await Project.find();
-    res.json(projects);
+
+    // Transforma los datos para devolver solo el idioma solicitado
+    const translatedProjects = projects.map(p => ({
+      _id: p._id,
+      // Para cada campo multilingüe, selecciona el idioma correcto
+      title: p.title[lang],
+      description: p.description[lang],
+      status: p.status[lang],
+      category: p.category[lang],
+      // Los campos que no son multilingües se quedan igual
+      emoji: p.emoji,
+      technologies: p.technologies,
+      repository_url: p.repository_url,
+      demo_url: p.demo_url,
+      image_url: p.image_url,
+      createdAt: p.createdAt,
+      updatedAt: p.updatedAt
+    }));
+
+    res.json(translatedProjects);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Obtener un proyecto por ID
-router.get("/:id", async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.id);
-    if (!project) return res.status(404).json({ message: "Proyecto no encontrado" });
-    res.json(project);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Crear un proyecto
-router.post("/", async (req, res) => {
-  try {
-    const newProject = new Project(req.body);
-    const savedProject = await newProject.save();
-    res.status(201).json(savedProject);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-// Actualizar un proyecto
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedProject = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedProject);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-// Eliminar un proyecto
-router.delete("/:id", async (req, res) => {
-  try {
-    await Project.findByIdAndDelete(req.params.id);
-    res.json({ message: "Proyecto eliminado" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
 module.exports = router;
