@@ -26,5 +26,4 @@ app.use("/api/projects", projectsRouter);
 app.use("/api/content", contentRouter);
 app.use("/api/profile", profileRouter); 
 // Puerto
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Servidor en http://localhost:${PORT}`));
+
