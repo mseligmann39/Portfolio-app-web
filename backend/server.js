@@ -28,7 +28,8 @@ app.use("/api/profile", profileRouter);
 // Puerto
 const allowedOrigins = [
   'ftp://seligmann.es',
-  '	https://seligmann.es', // Tu dominio en producción
+  'https://seligmann.es',
+  'https://maxi.seligmann.es', // Tu dominio en producción
   'http://localhost:5173'      // Tu dominio de desarrollo local (Vite por defecto)
 ];
 

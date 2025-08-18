@@ -2,10 +2,15 @@ import React from "react";
 
 function Footer({ content, profile }) {
   // Creamos el texto del footer reemplazando el nombre dinámicamente
-  const footerText = content.footerText.replace(
-    "Maximiliano Seligmann",
-    profile.name
-  );
+
+  // Primero nos aseguramos de que content y profile existan
+  if (!content || !profile) {
+    return null; // O un footer por defecto
+  }
+
+  // Luego, creamos el texto de forma segura
+  const footerText =
+    content.footerText?.replace("Maximiliano Seligmann", profile.name) || "";
 
   return (
     <footer>
