@@ -27,7 +27,7 @@ app.use("/api/content", contentRouter);
 app.use("/api/profile", profileRouter); 
 // Puerto
 const allowedOrigins = [
-  'https://maxi.seligmann.es', // Tu dominio en producción
+  'https://maxi.seligmann.es/', // Tu dominio en producción
   'http://localhost:5173'      // Tu dominio de desarrollo local (Vite por defecto)
 ];
 
