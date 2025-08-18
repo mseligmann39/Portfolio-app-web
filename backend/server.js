@@ -49,4 +49,4 @@ const corsOptions = {
 // 3. Usa la nueva configuración
 app.use(cors(corsOptions));
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log('Server corriendo en puerto '));
+app.listen(PORT, () => console.log('Server corriendo en puerto ~', PORT));
