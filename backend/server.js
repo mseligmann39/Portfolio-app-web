@@ -7,7 +7,11 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['https://maxi.seligmann.es','http://localhost:5173'] , // Reemplaza con el dominio de tu frontend en Hostinger
+    methods: ['GET'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+}));
 app.use(express.json());
 
 // Conexión a MongoDB Atlas
@@ -25,13 +29,8 @@ const contentRouter = require("./routes/contentRoutes");
 app.use("/api/projects", projectsRouter);
 app.use("/api/content", contentRouter);
 app.use("/api/profile", profileRouter); 
+
 // Puerto
-const allowedOrigins = [
-  'ftp://seligmann.es',
-  'https://seligmann.es',
-  'https://maxi.seligmann.es', // Tu dominio en producción
-  'http://localhost:5173'      // Tu dominio de desarrollo local (Vite por defecto)
-];
 
 const corsOptions = {
   origin: function (origin, callback) {
