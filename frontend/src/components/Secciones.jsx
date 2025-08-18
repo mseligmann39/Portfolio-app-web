@@ -11,28 +11,29 @@ function Secciones({ profile, projects, skills, content }) {
       <section id="projects" className="container">
         <h2>{content.projectsTitle}</h2>
         <div className="projects-grid">
-          {projects.map((project) => (
-            <div key={project._id} className="project-card">
-              <h3>
-                {project.emoji} {project.title}
-              </h3>
-              <p>{project.description}</p>
-              <div className="technologies">
-                <strong>Tecnologías:</strong>
-                {project.technologies.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
+          {Array.isArray(projects) &&
+            projects.map((project) => (
+              <div key={project._id} className="project-card">
+                <h3>
+                  {project.emoji} {project.title}
+                </h3>
+                <p>{project.description}</p>
+                <div className="technologies">
+                  <strong>Tecnologías:</strong>
+                  {project.technologies.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+                <a
+                  href={project.repository_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                >
+                  Ver más
+                </a>
               </div>
-              <a
-                href={project.repository_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn"
-              >
-                Ver más
-              </a>
-            </div>
-          ))}
+            ))}
         </div>
       </section>
 
