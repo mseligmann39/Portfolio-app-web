@@ -25,9 +25,12 @@ function App() {
       try {
         // Pedimos todos los datos en paralelo para mejorar el rendimiento
         const [profileRes, projectsRes, contentRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/profile?lang=${lang}`),
-          fetch(`http://localhost:5000/api/projects?lang=${lang}`),
-          fetch(`http://localhost:5000/api/content?lang=${lang}`),
+          //fetch(`http://localhost:5000/api/profile?lang=${lang}`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/content?lang=${lang}`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/profile?lang=${lang}`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/projects?lang=${lang}`),
+          // fetch(`http://localhost:5000/api/content?lang=${lang}`),
+          //fetch(`http://localhost:5000/api/content?lang=${lang}`),
         ]);
 
         // Convertimos las respuestas a JSON
