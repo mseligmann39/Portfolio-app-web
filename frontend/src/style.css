@@ -6,12 +6,12 @@
   --dark-gray: #333;
   --white: #ffffff;
   --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --font-family: 'Poppins', sans-serif;
+  --font-family: "Poppins", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Ajuste para la barra de navegación fija */
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -29,7 +29,9 @@ body {
   padding: 2rem 1.5rem;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
   margin-top: 0;
 }
@@ -77,10 +79,10 @@ header p {
 nav {
   background: var(--white);
   padding: 0 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 nav ul {
@@ -102,7 +104,7 @@ nav ul li a {
 }
 
 nav ul li a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -140,7 +142,7 @@ nav ul li a:hover::after {
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .project-card h3 {
@@ -187,7 +189,7 @@ nav ul li a:hover::after {
   transform: scale(1.05);
 }
 
-/* --- Habilidades --- */
+/* --- Habilidades y Contacto --- */
 .skills-list {
   list-style: none;
   padding: 0;
@@ -205,7 +207,6 @@ nav ul li a:hover::after {
   color: var(--secondary-color);
 }
 
-/* --- Contacto --- */
 #contact p {
   font-size: 1.1rem;
 }
@@ -219,7 +220,7 @@ footer {
   margin-top: 2rem;
 }
 
-/* --- Language Switcher --- */
+/* --- Selector de Idioma (Escritorio) --- */
 #lang-switcher {
   position: absolute;
   top: 15px;
@@ -279,29 +280,144 @@ footer {
   display: none;
 }
 
-/* --- Media Queries para Responsive Design --- */
-@media (max-width: 768px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 1.8rem; }
-  
-  nav ul {
-    flex-direction: column;
-    align-items: center;
+/* --- Elementos de Navegación Responsive --- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: fixed;
+  top: 1rem;
+  left: 1.5rem;
+  z-index: 1001;
+}
+
+.lang-options-mobile {
+  display: none;
+}
+
+/* --- Estilos del Loader de Carga --- */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--light-gray);
+}
+
+.loader {
+  border: 5px solid var(--secondary-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+.loader-text {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--dark-gray);
+  font-weight: 600;
+}
+
+.loader-text p {
+  margin: 0.5rem 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  nav ul li a {
-    padding: 0.8rem 1rem;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-@media (max-width: 480px) {
-  html { scroll-padding-top: 60px; }
-  header { padding: 3rem 1rem; }
-  h1 { font-size: 2rem; }
+/* --- Media Queries para Responsive Design --- */
 
+/* Para Tablets y Móviles Grandes (hasta 768px) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Lógica de Visibilidad --- */
+  #lang-switcher {
+    display: none;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .lang-options-mobile {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .lang-options-mobile button {
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .lang-options-mobile span {
+    color: var(--primary-color);
+  }
+
+  /* --- Menú Hamburguesa Desplegable --- */
+  nav ul.nav-links {
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(35, 85, 177, 0.603);
+    padding-top: 5rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  nav ul.nav-links.nav-open {
+    transform: translateX(0);
+  }
+
+  nav ul li a {
+    color: var(--white);
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Para Móviles Pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  html {
+    scroll-padding-top: 60px;
+  }
+  header {
+    padding: 3rem 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
   .container {
     padding: 1.5rem 1rem;
   }

@@ -7,6 +7,8 @@ import Nav from "./components/Nav";
 import Secciones from "./components/Secciones";
 import Footer from "./components/Footer";
 
+import Loader from "./components/Loader";
+
 function App() {
   // --- ESTADOS ---
   // Gestiona el idioma actual de la aplicación
@@ -18,30 +20,44 @@ function App() {
   // Almacena todo el contenido de texto de la UI (títulos, botones, etc.)
   const [content, setContent] = useState(null);
 
+  console.log("--- Renderizando App ---");
+  console.log("Estado actual de profile:", profile);
+  console.log("Estado actual de content:", content);
+  console.log("Estado actual de projects:", projects);
+
   // --- PETICIONES A LA API ---
   // Se ejecutan cada vez que el estado 'lang' cambia
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Pedimos todos los datos en paralelo para mejorar el rendimiento
-        const [profileRes, projectsRes, contentRes] = await Promise.all([
-          //fetch(`http://localhost:5000/api/profile?lang=${lang}`),
-          fetch(`${import.meta.env.VITE_API_URL}/api/content?lang=${lang}`),
+        const [profileRes, contentRes, projectsRes] = await Promise.all([
+          // Para producción, usa la URL de la API desplegada
+
           fetch(`${import.meta.env.VITE_API_URL}/api/profile?lang=${lang}`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/content?lang=${lang}`),
           fetch(`${import.meta.env.VITE_API_URL}/api/projects?lang=${lang}`),
-          // fetch(`http://localhost:5000/api/content?lang=${lang}`),
+
+          // Para pruebas en local, puedes usar:
+          //fetch(`http://localhost:5000/api/profile?lang=${lang}`),
           //fetch(`http://localhost:5000/api/content?lang=${lang}`),
+          //fetch(`http://localhost:5000/api/projects?lang=${lang}`),
         ]);
 
         // Convertimos las respuestas a JSON
         const profileData = await profileRes.json();
-        const projectsData = await projectsRes.json();
         const contentData = await contentRes.json();
 
+        const projectsData = await projectsRes.json();
+        console.log(">>> Datos recibidos de la API <<<");
+        console.log("Datos de profile:", profileData);
+        console.log("Datos de content:", contentData);
+        console.log("Datos de projects:", projectsData);
         // Actualizamos los estados con los datos recibidos
+
         setProfile(profileData);
-        setProjects(projectsData);
         setContent(contentData);
+        setProjects(projectsData);
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
@@ -61,7 +77,7 @@ function App() {
 
   // Muestra un estado de carga mientras los datos esenciales no lleguen
   if (!profile || !content) {
-    return <div>Cargando Portfolio...</div>;
+    return <Loader />;
   }
 
   // --- RENDERIZADO ---
@@ -69,7 +85,7 @@ function App() {
   return (
     <>
       <Header profile={profile} setLang={setLang} />
-      <Nav content={content} />
+      <Nav content={content} setLang={setLang} />
       <Secciones
         profile={profile}
         projects={projects}
