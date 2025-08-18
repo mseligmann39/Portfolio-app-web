@@ -6,46 +6,53 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
-app.use(cors({
-    origin: ['https://maxi.seligmann.es','http://localhost:5173'] , // Reemplaza con el dominio de tu frontend en Hostinger
-    methods: ['GET'], // Métodos HTTP permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
-}));
-app.use(express.json());
-
-// Conexión a MongoDB Atlas
-mongoose.connect(process.env.MONGO_URI, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
-})
-.then(() => console.log("✅ Conectado a MongoDB Atlas"))
-.catch(err => console.error("❌ Error de conexión:", err));
-
-// Rutas
-const projectsRouter = require("./routes/projectRoutes");
-const profileRouter = require("./routes/profileRoutes");
-const contentRouter = require("./routes/contentRoutes");
-app.use("/api/projects", projectsRouter);
-app.use("/api/content", contentRouter);
-app.use("/api/profile", profileRouter); 
-
-// Puerto
+// --- Configuración de CORS ---
+// 1. Define tu lista de dominios permitidos (whitelist)
+const allowedOrigins = [
+  'https://seligmann.es',      // Tu dominio principal
+  'https://maxi.seligmann.es',  // Tu subdominio
+  'http://localhost:5173'      // Tu entorno de desarrollo local
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
     // 2. Comprueba si el origen de la petición está en tu lista blanca
+    //    o si no hay origen (para herramientas como Postman)
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      // Si está permitido (o es una petición sin origen como Postman), permite el acceso
-      callback(null, true);
+      callback(null, true); // Permite el acceso
     } else {
-      // Si no está permitido, rechaza la petición
-      callback(new Error('No permitido por CORS'));
+      callback(new Error('No permitido por la política de CORS')); // Rechaza la petición
     }
   }
 };
 
-// 3. Usa la nueva configuración
+// 3. Usa la configuración de CORS como el PRIMER middleware
 app.use(cors(corsOptions));
+
+
+// --- Otros Middlewares ---
+app.use(express.json());
+
+
+// --- Conexión a MongoDB Atlas ---
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ Conectado a MongoDB Atlas"))
+.catch(err => console.error("❌ Error de conexión:", err));
+
+
+// --- Rutas de la API ---
+const projectsRouter = require("./routes/projectRoutes");
+const profileRouter = require("./routes/profileRoutes");
+const contentRouter = require("./routes/contentRoutes");
+
+app.use("/api/projects", projectsRouter);
+app.use("/api/content", contentRouter);
+app.use("/api/profile", profileRouter);
+
+
+// --- Arranque del Servidor ---
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log('Server corriendo en puerto ~', PORT));
+app.listen(PORT, () => console.log('🚀 Servidor corriendo en puerto ~', PORT));
