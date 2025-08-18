@@ -55,7 +55,9 @@ function App() {
   // En lugar de pedir una lista de skills a la API, la creamos dinámicamente.
   // 1. Creamos un array con TODAS las tecnologías de TODOS los proyectos.
   // 2. Usamos 'Set' para eliminar duplicados y obtener una lista de habilidades únicas.
-  const uniqueSkills = [...new Set(projects.flatMap((p) => p.technologies))];
+  const uniqueSkills = Array.isArray(projects)
+    ? [...new Set(projects.flatMap((p) => p.technologies))]
+    : [];
 
   // Muestra un estado de carga mientras los datos esenciales no lleguen
   if (!profile || !content) {
