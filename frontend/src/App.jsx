@@ -1,98 +1,79 @@
-import React, { useState, useEffect } from "react";
-import "./style.css";
-
-// Importamos todos nuestros componentes de presentación
-import Header from "./components/Header";
-import Nav from "./components/Nav";
-import Secciones from "./components/Secciones";
-import Footer from "./components/Footer";
-
-import Loader from "./components/Loader";
+import { useState, useEffect } from 'react';
+import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Loader from './components/Loader';
+import Home from './pages/Home';
+import About from './pages/About';
+import Projects from './pages/Projects';
+import Skills from './pages/Skills';
+import Contact from './pages/Contact';
 
 function App() {
-  // --- ESTADOS ---
-  // Gestiona el idioma actual de la aplicación
-  const [lang, setLang] = useState("es");
-  // Almacena los datos del perfil (nombre, subtítulo, etc.)
+  const [language, setLanguage] = useState('es');
   const [profile, setProfile] = useState(null);
-  // Almacena la lista de proyectos
   const [projects, setProjects] = useState([]);
-  // Almacena todo el contenido de texto de la UI (títulos, botones, etc.)
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({});
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
-  console.log("--- Renderizando App ---");
-  console.log("Estado actual de profile:", profile);
-  console.log("Estado actual de content:", content);
-  console.log("Estado actual de projects:", projects);
-
-  // --- PETICIONES A LA API ---
-  // Se ejecutan cada vez que el estado 'lang' cambia
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Pedimos todos los datos en paralelo para mejorar el rendimiento
-        const [profileRes, contentRes, projectsRes] = await Promise.all([
-          // Para producción, usa la URL de la API desplegada
-
-          fetch(`${import.meta.env.VITE_API_URL}/api/profile?lang=${lang}`),
-          fetch(`${import.meta.env.VITE_API_URL}/api/content?lang=${lang}`),
-          fetch(`${import.meta.env.VITE_API_URL}/api/projects?lang=${lang}`),
-
-          // Para pruebas en local, puedes usar:
-          //fetch(`http://localhost:5000/api/profile?lang=${lang}`),
-          //fetch(`http://localhost:5000/api/content?lang=${lang}`),
-          //fetch(`http://localhost:5000/api/projects?lang=${lang}`),
-        ]);
-
-        // Convertimos las respuestas a JSON
+        setLoading(true);
+        const profileRes = await fetch(`/api/profile?lang=${language}`);
         const profileData = await profileRes.json();
-        const contentData = await contentRes.json();
-
-        const projectsData = await projectsRes.json();
-        console.log(">>> Datos recibidos de la API <<<");
-        console.log("Datos de profile:", profileData);
-        console.log("Datos de content:", contentData);
-        console.log("Datos de projects:", projectsData);
-        // Actualizamos los estados con los datos recibidos
-
         setProfile(profileData);
-        setContent(contentData);
+
+        const projectsRes = await fetch(`/api/projects?lang=${language}`);
+        const projectsData = await projectsRes.json();
         setProjects(projectsData);
+
+        const contentRes = await fetch(`/api/content?lang=${language}`);
+        const contentData = await contentRes.json();
+        setContent(contentData);
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [lang]);
+  }, [language]);
 
-  // --- LÓGICA DERIVADA ---
-  // ¡AQUÍ ESTÁ LA MAGIA!
-  // En lugar de pedir una lista de skills a la API, la creamos dinámicamente.
-  // 1. Creamos un array con TODAS las tecnologías de TODOS los proyectos.
-  // 2. Usamos 'Set' para eliminar duplicados y obtener una lista de habilidades únicas.
-  const uniqueSkills = Array.isArray(projects)
-    ? [...new Set(projects.flatMap((p) => p.technologies))]
+  // Construimos el array navLinks a partir del objeto content
+  const navLinks = content.navAbout
+    ? [
+        { to: '/about', text: content.navAbout },
+        { to: '/projects', text: content.navProjects },
+        { to: '/skills', text: content.navSkills },
+        { to: '/contact', text: content.navContact },
+      ]
     : [];
 
-  // Muestra un estado de carga mientras los datos esenciales no lleguen
-  if (!profile || !content) {
-    return <Loader />;
+  if (loading) {
+    return <Loader language={language} />;
   }
 
-  // --- RENDERIZADO ---
-  // El return es limpio: solo ensambla los componentes y les pasa los datos necesarios
   return (
     <>
-      <Header profile={profile} setLang={setLang} />
-      <Nav content={content} setLang={setLang} />
-      <Secciones
-        profile={profile}
-        projects={projects}
-        skills={uniqueSkills} // Le pasamos la lista de skills únicas que acabamos de crear
-        content={content}
-      />
-      <Footer content={content} profile={profile} />
+      <Header language={language} setLanguage={setLanguage} navLinks={navLinks} profileName={profile?.name} />
+      <main key={location.pathname} className="page-enter">
+        <Routes>
+          <Route 
+            path="/" 
+            element={<Outlet context={{ profile, projects, content, language }} />}
+          >
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="skills" element={<Skills />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+        </Routes>
+      </main>
+      <Footer footerText={content.footerText} />
     </>
   );
 }
