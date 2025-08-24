@@ -25,6 +25,7 @@ const contentSchema = new mongoose.Schema({
 
   // Otros textos
   downloadCV: languageSchema,
+  contactText: languageSchema, // Texto para la página de contacto
   footerText: languageSchema
 });
 

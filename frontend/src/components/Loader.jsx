@@ -1,15 +1,25 @@
-// En src/components/Loader.jsx
 import React from "react";
 
-function Loader() {
+function Loader({ language }) {
+  const texts = {
+    es: {
+      loading: "Cargando...",
+      wait: "Por favor, espere."
+    },
+    en: {
+      loading: "Loading...",
+      wait: "Please wait."
+    }
+  };
+
+  const currentTexts = texts[language] || texts.es;
+
   return (
-    // Ya no necesitas el div exterior
     <div className="loader-container">
       <div className="loader"></div>
       <div className="loader-text">
-        <p>Cargando...</p>
-        <p>Por favor espere.</p>
-        {/* He quitado la línea de reiniciar para que sea más limpio */}
+        <p>{currentTexts.loading}</p>
+        <p>{currentTexts.wait}</p>
       </div>
     </div>
   );
