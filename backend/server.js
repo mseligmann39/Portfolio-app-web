@@ -50,6 +50,41 @@ app.use("/api/projects", projectsRouter);
 app.use("/api/content", contentRouter);
 app.use("/api/profile", profileRouter);
 
+// --- Ruta para Health Check de UptimeRobot ---
+app.get("/api/health-check", async (req, res) => {
+  // La URL de tu API que quieres mantener activa
+  const apiUrl = "https://portfolio-app-web-maxi.onrender.com/api/projects";
+
+  try {
+    // Hacemos una llamada a la API de proyectos para "despertarla"
+    const response = await fetch(apiUrl);
+
+    // Verificamos si la respuesta de la API fue exitosa
+    if (response.ok) {
+      console.log("Health check superado. La API respondió correctamente.");
+      // Si todo va bien, devolvemos un 200 a UptimeRobot
+      res.status(200).json({ status: "ok", message: "API is healthy" });
+    } else {
+      // Si la API responde con un error, se lo notificamos a UptimeRobot
+      console.error(
+        `Health check fallido. La API respondió con estado: ${response.status}`
+      );
+      res
+        .status(500)
+        .json({
+          status: "error",
+          message: `API returned status: ${response.status}`,
+        });
+    }
+  } catch (error) {
+    // Si hay un error de red (no se puede conectar), también lo notificamos
+    console.error("Health check fallido. No se pudo conectar a la API.", error);
+    res
+      .status(500)
+      .json({ status: "error", message: "Failed to connect to the API" });
+  }
+});
+
 // --- Arranque del Servidor ---
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("🚀 Servidor corriendo en puerto ~", PORT));
