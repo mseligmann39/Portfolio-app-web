@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Loader from './components/Loader';
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Skills from './pages/Skills';
-import Contact from './pages/Contact';
+import { useState, useEffect } from "react";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Loader from "./components/Loader";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import Skills from "./pages/Skills";
+import Contact from "./pages/Contact";
 
 function App() {
-  const [language, setLanguage] = useState('es');
+  const [language, setLanguage] = useState("es");
   const [profile, setProfile] = useState(null);
   const [projects, setProjects] = useState([]);
   const [content, setContent] = useState({});
@@ -33,7 +33,7 @@ function App() {
         const contentData = await contentRes.json();
         setContent(contentData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -45,10 +45,10 @@ function App() {
   // Construimos el array navLinks a partir del objeto content
   const navLinks = content.navAbout
     ? [
-        { to: '/about', text: content.navAbout },
-        { to: '/projects', text: content.navProjects },
-        { to: '/skills', text: content.navSkills },
-        { to: '/contact', text: content.navContact },
+        { to: "/about", text: content.navAbout },
+        { to: "/projects", text: content.navProjects },
+        { to: "/skills", text: content.navSkills },
+        { to: "/contact", text: content.navContact },
       ]
     : [];
 
@@ -58,12 +58,19 @@ function App() {
 
   return (
     <>
-      <Header language={language} setLanguage={setLanguage} navLinks={navLinks} profileName={profile?.name} />
+      <Header
+        language={language}
+        setLanguage={setLanguage}
+        navLinks={navLinks}
+        profileName={profile?.name}
+      />
       <main key={location.pathname} className="page-enter">
         <Routes>
-          <Route 
-            path="/" 
-            element={<Outlet context={{ profile, projects, content, language }} />}
+          <Route
+            path="/"
+            element={
+              <Outlet context={{ profile, projects, content, language }} />
+            }
           >
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
