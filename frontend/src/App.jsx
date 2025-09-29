@@ -17,19 +17,32 @@ function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
+  // --- INICIO DE LA MODIFICACIÓN ---
+  // Reemplaza 'tudominio.com' con tu dominio real.
+  const API_BASE_URL = "http://localhost:8000/api/";
+  // --- FIN DE LA MODIFICACIÓN ---
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const profileRes = await fetch(`/api/profile?lang=${language}`);
+
+        // Usamos la nueva URL base para todas las peticiones
+        const profileRes = await fetch(
+          `${API_BASE_URL}/profile.php?lang=${language}`
+        );
         const profileData = await profileRes.json();
         setProfile(profileData);
 
-        const projectsRes = await fetch(`/api/projects?lang=${language}`);
+        const projectsRes = await fetch(
+          `${API_BASE_URL}/projects.php?lang=${language}`
+        );
         const projectsData = await projectsRes.json();
         setProjects(projectsData);
 
-        const contentRes = await fetch(`/api/content?lang=${language}`);
+        const contentRes = await fetch(
+          `${API_BASE_URL}/content.php?lang=${language}`
+        );
         const contentData = await contentRes.json();
         setContent(contentData);
       } catch (error) {
@@ -42,7 +55,6 @@ function App() {
     fetchData();
   }, [language]);
 
-  // Construimos el array navLinks a partir del objeto content
   const navLinks = content.navAbout
     ? [
         { to: "/about", text: content.navAbout },
