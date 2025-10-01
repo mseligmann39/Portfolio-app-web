@@ -9,6 +9,13 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 
+// --- INICIO DE LA MODIFICACIÓN ---
+// Lee la URL de la API desde las variables de entorno de Vite.
+// Para 'npm run dev', usará la variable en .env.development.
+// Para 'npm run build', usará la variable en .env.production.
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+// --- FIN DE LA MODIFICACIÓN ---
+
 function App() {
   const [language, setLanguage] = useState("es");
   const [profile, setProfile] = useState(null);
@@ -18,18 +25,26 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
+    // Si la URL de la API no está definida, muestra un error y no intentes hacer fetch.
+    if (!API_BASE_URL) {
+      console.error("Error: VITE_API_URL no está definida en tus archivos .env");
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         setLoading(true);
-        const profileRes = await fetch(`/api/profile?lang=${language}`);
+        
+        const profileRes = await fetch(`${API_BASE_URL}/profile.php?lang=${language}`);
         const profileData = await profileRes.json();
         setProfile(profileData);
 
-        const projectsRes = await fetch(`/api/projects?lang=${language}`);
+        const projectsRes = await fetch(`${API_BASE_URL}/projects.php?lang=${language}`);
         const projectsData = await projectsRes.json();
         setProjects(projectsData);
 
-        const contentRes = await fetch(`/api/content?lang=${language}`);
+        const contentRes = await fetch(`${API_BASE_URL}/content.php?lang=${language}`);
         const contentData = await contentRes.json();
         setContent(contentData);
       } catch (error) {
@@ -42,7 +57,6 @@ function App() {
     fetchData();
   }, [language]);
 
-  // Construimos el array navLinks a partir del objeto content
   const navLinks = content.navAbout
     ? [
         { to: "/about", text: content.navAbout },

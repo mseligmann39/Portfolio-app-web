@@ -1,23 +1,17 @@
-import React from "react";
+import styles from "./Loader.module.css";
 
 function Loader({ language }) {
   const texts = {
-    es: {
-      loading: "Cargando...",
-      wait: "Por favor, espere."
-    },
-    en: {
-      loading: "Loading...",
-      wait: "Please wait."
-    }
+    es: { loading: "Cargando...", wait: "Por favor, espere." },
+    en: { loading: "Loading...", wait: "Please wait." },
   };
 
   const currentTexts = texts[language] || texts.es;
 
   return (
-    <div className="loader-container">
-      <div className="loader"></div>
-      <div className="loader-text">
+    <div className={styles.loaderContainer}>
+      <div className={styles.loader}></div>
+      <div className={styles.loaderText}>
         <p>{currentTexts.loading}</p>
         <p>{currentTexts.wait}</p>
       </div>

@@ -1,0 +1,51 @@
+/* === PÁGINA HOME (CORREGIDO Y CENTRADO) === */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center; /* Asegura que el texto dentro de los elementos esté centrado */
+
+  /* Ajuste de altura para ocupar el espacio disponible sin scroll */
+  height: calc(100vh - 98px);
+  overflow: hidden;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}
+
+.home-container .name {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.home-container .subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #b0b0b0;
+}
+
+/* --- ESTILOS RESPONSIVE --- */
+@media (max-width: 768px) {
+  .home-container .name {
+    font-size: 2.5rem;
+  }
+  .home-container .subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+/* === PÁGINA HOME (CORREGIDO Y CENTRADO) === */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Esto centra el contenido verticalmente */
+  align-items: center; /* Esto centra el contenido horizontalmente */
+  text-align: center; /* Esto asegura que el texto dentro de los elementos también se centre */
+
+  /* Ajuste de altura para ocupar el espacio disponible sin scroll */
+  height: calc(100vh - 98px);
+  overflow: hidden;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}

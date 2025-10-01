@@ -1,4 +1,5 @@
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext } from "react-router-dom";
+import styles from "./Home.module.css";
 
 function Home() {
   const { profile } = useOutletContext();
@@ -6,11 +7,17 @@ function Home() {
   if (!profile) return null;
 
   return (
-    <div className="home-container">
-      <h1 className="name fade-in-up-animation" style={{ animationDelay: '0.2s' }}>
+    <div className={styles.homeContainer}>
+      <h1
+        className={`${styles.name} fade-in-up-animation`}
+        style={{ animationDelay: "0.2s" }}
+      >
         {profile.name}
       </h1>
-      <p className="subtitle fade-in-up-animation" style={{ animationDelay: '0.5s' }}>
+      <p
+        className={`${styles.subtitle} fade-in-up-animation`}
+        style={{ animationDelay: "0.5s" }}
+      >
         {profile.subtitle}
       </p>
     </div>
