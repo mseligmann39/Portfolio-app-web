@@ -17,10 +17,11 @@ function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  // --- INICIO DE LA MODIFICACIÓN ---
-  // Reemplaza 'tudominio.com' con tu dominio real.
-  const API_BASE_URL = "http://localhost:8000/api/";
-  // --- FIN DE LA MODIFICACIÓN ---
+  // En desarrollo, si VITE_API_URL no está definida en un archivo .env,
+  // se usará la URL de localhost como valor por defecto.
+  const API_BASE_URL =
+    import.meta.env.VITE_API_URL || "https://apimaxi.seligmann.es/api/";
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,19 +30,19 @@ function App() {
 
         // Usamos la nueva URL base para todas las peticiones
         const profileRes = await fetch(
-          `${API_BASE_URL}/profile.php?lang=${language}`
+          `${API_BASE_URL}profile.php?lang=${language}`
         );
         const profileData = await profileRes.json();
         setProfile(profileData);
 
         const projectsRes = await fetch(
-          `${API_BASE_URL}/projects.php?lang=${language}`
+          `${API_BASE_URL}projects.php?lang=${language}`
         );
         const projectsData = await projectsRes.json();
         setProjects(projectsData);
 
         const contentRes = await fetch(
-          `${API_BASE_URL}/content.php?lang=${language}`
+          `${API_BASE_URL}content.php?lang=${language}`
         );
         const contentData = await contentRes.json();
         setContent(contentData);
@@ -63,6 +64,10 @@ function App() {
         { to: "/contact", text: content.navContact },
       ]
     : [];
+
+  const footerText = profile?.name
+    ? content.footerText?.replace("Maximiliano Seligmann", profile.name)
+    : content.footerText;
 
   if (loading) {
     return <Loader language={language} />;
@@ -92,7 +97,7 @@ function App() {
           </Route>
         </Routes>
       </main>
-      <Footer footerText={content.footerText} />
+      <Footer footerText={footerText} />
     </>
   );
 }

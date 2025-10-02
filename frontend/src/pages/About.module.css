@@ -1,0 +1,16 @@
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea el contenido arriba */
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  padding-top: 15vh; /* Empuja el contenido hacia abajo desde el borde superior */
+  height: calc(100vh - 98px - 60px);
+}
+
+.description {
+  max-width: 70ch; /* Mantiene una buena legibilidad */
+  line-height: 1.7;
+}

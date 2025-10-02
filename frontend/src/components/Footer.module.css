@@ -1,0 +1,13 @@
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--card-bg-color);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}

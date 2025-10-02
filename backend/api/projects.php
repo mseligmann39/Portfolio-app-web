@@ -1,17 +1,26 @@
 <?php
 
 // 1. Incluir el archivo de conexión a la base de datos MySQL
-require_once __DIR__ . '/../database.php'; // Nos da la variable $pdo
+require_once __DIR__ . '/../database.php';
 
-// 2. Establecer las cabeceras de la respuesta
+// 2. Manejar la petición pre-vuelo (preflight) de CORS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    http_response_code(204);
+    exit;
+}
+
+// 3. Establecer las cabeceras de la respuesta para la petición real
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-// 3. Obtener el idioma de la URL
+// 4. Obtener el idioma de la URL
 $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
 
 try {
-    // 4. Preparar la consulta SQL para unir las tablas de proyectos
+    // 5. Preparar la consulta SQL para unir las tablas de proyectos
     $sql = "
         SELECT 
             pb.id,
@@ -32,11 +41,11 @@ try {
             pt.language = ?
     ";
 
-    // 5. Ejecutar la consulta de forma segura
+    // 6. Ejecutar la consulta de forma segura
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$lang]);
 
-    // 6. Obtener todos los resultados
+    // 7. Obtener todos los resultados
     $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     // 7. Post-procesamiento: decodificar el JSON de 'technologies'
@@ -46,7 +55,7 @@ try {
         }
     }
 
-    // 8. Enviar la respuesta final en formato JSON
+    // 9. Enviar la respuesta final en formato JSON
     echo json_encode($projects);
 
 } catch (Exception $e) {

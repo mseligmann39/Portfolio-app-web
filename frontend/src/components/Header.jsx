@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import styles from './Header.module.css';
 
 function Header({ language, setLanguage, navLinks = [], profileName }) {
   const handleLanguageChange = () => {
@@ -7,19 +8,19 @@ function Header({ language, setLanguage, navLinks = [], profileName }) {
   };
 
   return (
-    <header className="header">
-      <div className="logo">
+    <header className={styles.header}>
+      <div className={styles.logo}>
         <NavLink to="/">
-          <img src="/LOGO.png" alt="Logo" className="header-logo" />
+          <img src="/LOGO.png" alt="Logo" />
         </NavLink>
       </div>
       <nav>
-        <ul className="nav-links">
+        <ul className={styles.navLinks}>
           {navLinks.map((link) => (
             <li key={link.to}>
               <NavLink 
                 to={link.to}
-                className={({ isActive }) => isActive ? 'active' : ''}
+                className={({ isActive }) => isActive ? styles.active : ''}
               >
                 {link.text}
               </NavLink>
@@ -27,7 +28,7 @@ function Header({ language, setLanguage, navLinks = [], profileName }) {
           ))}
         </ul>
       </nav>
-      <div className="lang-switcher">
+      <div className={styles.langSwitcher}>
         <button onClick={handleLanguageChange}>
           {language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
         </button>

@@ -1,0 +1,167 @@
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.status-en-desarrollo,
+.status-in-progress {
+  border-left: 4px solid var(--border-color-dev);
+}
+
+.status-finalizado,
+.status-finished {
+  border-left: 4px solid var(--border-color-done);
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #222;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.05);
+}
+
+.projectContent {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-text-color);
+}
+
+.projectStatusTag {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.projectDescription {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.projectLinks {
+  margin-top: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.projectLinks a {
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.projectLinks a:hover {
+  background-color: var(--accent-color);
+  color: var(--primary-text-color);
+}
+
+.contactIcon {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* === IMAGE MODAL === */
+.imageModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+}
+
+.imageModalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: fadeInUp 0.3s ease;
+}
+
+.imageModalContent img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.closeModalButton {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: var(--accent-color);
+  color: white;
+  border: 2px solid var(--bg-color);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.8rem;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.closeModalButton:hover {
+  background-color: var(--accent-color-hover);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .closeModalButton {
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+    line-height: 28px;
+    top: -10px;
+    right: -10px;
+  }
+}
