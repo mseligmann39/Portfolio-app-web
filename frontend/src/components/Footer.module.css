@@ -1,13 +1,34 @@
-
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: var(--footer-height);
   display: flex;
+  flex-direction: column; /* Apila el texto y los iconos verticalmente */
   justify-content: center;
   align-items: center;
   background-color: var(--card-bg-color);
   border-top: 1px solid var(--border-color);
   font-size: 0.9rem;
+  gap: 0.5rem; /* Espacio entre el texto y los iconos */
+  padding: 1rem 0; /* Añade padding vertical por si el contenido crece */
+  height: auto; /* Altura automática para acomodar el contenido */
+}
+
+.contactLinksContainer {
+  display: flex;
+  gap: 1.5rem; /* Reduce el espacio entre iconos */
+  align-items: center;
+}
+
+.contactIcon {
+  width: 24px; /* Reduce un poco el tamaño del icono */
+  height: 24px;
+  color: var(--primary-text-color);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contactIcon:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
 }

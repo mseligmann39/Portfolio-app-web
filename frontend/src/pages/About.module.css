@@ -7,7 +7,6 @@
   text-align: center;
   padding: 2rem 1rem;
   padding-top: 15vh; /* Empuja el contenido hacia abajo desde el borde superior */
-  height: calc(100vh - 98px - 60px);
 }
 
 .description {
