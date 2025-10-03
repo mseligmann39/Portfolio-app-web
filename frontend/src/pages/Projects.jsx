@@ -14,7 +14,12 @@ function Projects() {
     setSelectedImage(null);
   };
 
-  const sortedProjects = [...projects].sort((a, b) => b._id - a._id);
+  const sortedProjects = [...projects].sort((a, b) => {
+    if (a.title && b.title) {
+      return a.title.localeCompare(b.title);
+    }
+    return 0;
+  });
 
   return (
     <div>
