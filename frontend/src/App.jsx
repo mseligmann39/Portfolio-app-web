@@ -6,7 +6,6 @@ import Loader from "./components/Loader";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
 
 function App() {
   const [language, setLanguage] = useState("es");
@@ -59,7 +58,6 @@ function App() {
     ? [
         { to: "/about", text: content.navAbout },
         { to: "/projects", text: content.navProjects },
-        { to: "/skills", text: content.navSkills },
       ]
     : [];
 
@@ -90,7 +88,6 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="projects" element={<Projects />} />
-            <Route path="skills" element={<Skills />} />
           </Route>
         </Routes>
       </main>
