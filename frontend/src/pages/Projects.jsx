@@ -13,7 +13,11 @@ function Projects() {
     <section>
       <h2>{content.projectsTitle || "Proyectos"}</h2>
       <div className={styles.projectsGrid}>
-        {projects.map((project) => (
+        {[...projects].sort((a, b) => {
+            if (a._id > b._id) return -1;
+            if (a._id < b._id) return 1;
+            return 0;
+          }).map((project) => (
           <div
             key={project._id}
             className={`${styles.projectCard} ${
