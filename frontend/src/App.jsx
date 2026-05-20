@@ -9,7 +9,8 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "https://apimaxi.seligmann.es/api/";
 
 function App() {
   const [language, setLanguage] = useState("es");
@@ -31,19 +32,19 @@ function App() {
         setLoading(true);
 
         const profileRes = await fetch(
-          `${API_BASE_URL}/profile.php?lang=${language}`
+          `${API_BASE_URL}profile.php?lang=${language}`
         );
         const profileData = await profileRes.json();
         setProfile(profileData);
 
         const projectsRes = await fetch(
-          `${API_BASE_URL}/projects.php?lang=${language}`
+          `${API_BASE_URL}projects.php?lang=${language}`
         );
         const projectsData = await projectsRes.json();
         setProjects(projectsData);
 
         const contentRes = await fetch(
-          `${API_BASE_URL}/content.php?lang=${language}`
+          `${API_BASE_URL}content.php?lang=${language}`
         );
         const contentData = await contentRes.json();
         setContent(contentData);
@@ -65,6 +66,10 @@ function App() {
         { to: "/contact", text: content.navContact },
       ]
     : [];
+
+  const footerText = profile?.name
+    ? content.footerText?.replace("Maximiliano Seligmann", profile.name)
+    : content.footerText;
 
   if (loading) {
     return <Loader language={language} />;
@@ -94,7 +99,7 @@ function App() {
           </Route>
         </Routes>
       </main>
-      <Footer footerText={content.footerText} />
+      <Footer footerText={footerText} profile={profile} />
     </>
   );
 }

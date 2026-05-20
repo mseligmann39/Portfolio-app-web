@@ -1,4 +1,18 @@
-/* Efecto máquina de escribir */
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  padding-top: 15vh;
+}
+
+.description {
+  max-width: 70ch;
+  line-height: 1.7;
+}
+
 .typewriterText::after {
   content: "_";
   animation: blink 0.7s infinite;

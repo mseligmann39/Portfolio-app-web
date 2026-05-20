@@ -1,17 +1,26 @@
 <?php
 
 // 1. Incluir el archivo de conexión a la base de datos MySQL
-require_once __DIR__ . '/../database.php'; // Ahora nos da la variable $pdo
+require_once __DIR__ . '/../database.php';
 
-// 2. Establecer las cabeceras de la respuesta
+// 2. Manejar la petición pre-vuelo (preflight) de CORS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    http_response_code(204);
+    exit;
+}
+
+// 3. Establecer las cabeceras de la respuesta para la petición real
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-// 3. Obtener el idioma de la URL
+// 4. Obtener el idioma de la URL
 $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
 
 try {
-    // 4. Preparar la consulta SQL
+    // 5. Preparar la consulta SQL
     // Esta consulta une las dos tablas para obtener todos los datos en una sola petición.
     $sql = "
         SELECT 
@@ -29,14 +38,14 @@ try {
             pt.language = ? AND pb.id = 1
     ";
 
-    // 5. Ejecutar la consulta de forma segura
+    // 6. Ejecutar la consulta de forma segura
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$lang]);
 
-    // 6. Obtener el resultado
+    // 7. Obtener el resultado
     $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // 7. Comprobar si se encontró el perfil y enviar la respuesta
+    // 8. Comprobar si se encontró el perfil y enviar la respuesta
     if ($profile) {
         // Como la consulta ya nos da los campos correctos, solo la codificamos.
         echo json_encode($profile);

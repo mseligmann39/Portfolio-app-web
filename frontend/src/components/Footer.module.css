@@ -2,11 +2,32 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: var(--footer-height);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--card-bg-color);
   border-top: 1px solid var(--border-color);
   font-size: 0.9rem;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  height: auto;
+}
+
+.contactLinksContainer {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.contactIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-text-color);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contactIcon:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
 }

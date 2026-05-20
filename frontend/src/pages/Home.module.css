@@ -1,0 +1,29 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Ocupa toda la altura de la ventana */
+  height: 100vh;
+  /* Evita el scroll dentro del contenedor si el contenido se desborda */
+  overflow: hidden;
+  /* Centra el contenido verticalmente, considerando que no habrá scroll */
+  padding-bottom: 158px; /* Ajuste para compensar header/footer si fuera necesario, pero con vh es mejor manejarlo en el layout principal */
+}
+
+.name {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  /* La animación ya no necesita estar en style.css */
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #b0b0b0;
+}
+
+/* Clases para las animaciones que ya estaban en Home.jsx */

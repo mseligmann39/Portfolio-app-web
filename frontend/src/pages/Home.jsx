@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import styles from "./Home.module.css";
 
 function Home() {
   const { profile } = useOutletContext();
+
+  useEffect(() => {
+    document.body.classList.add("no-scroll");
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
 
   if (!profile) return null;
 
