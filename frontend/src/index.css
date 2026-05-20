@@ -1,0 +1,115 @@
+/* === PALETA DE COLORES Y VARIABLES === */
+:root {
+  --bg-color: #1a1a1a;
+  --primary-text-color: #f0f0f0;
+  --accent-color: #ff4136; /* Rojo elegante */
+  --accent-color-hover: #ff635a;
+  --card-bg-color: #2a2a2a;
+  --border-color: #444;
+  --border-color-dev: #ff4136; /* Borde para proyectos 'en desarrollo' */
+  --border-color-done: #01ff70; /* Borde para proyectos 'finalizados' (verde neón sutil) */
+  --font-family: "Poppins", sans-serif;
+  --footer-height: 60px;
+}
+
+/* === ESTILOS GLOBALES === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--primary-text-color);
+  padding-bottom: var(--footer-height);
+  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  color: var(--primary-text-color);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 70ch; /* Mejora la legibilidad */
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color-hover);
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.fade-in-up-animation {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* === RESPONSIVE DESIGN GLOBAL === */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,12 @@
+/* Efecto máquina de escribir */
+.typewriterText::after {
+  content: "_";
+  animation: blink 0.7s infinite;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

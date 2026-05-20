@@ -9,6 +9,8 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [language, setLanguage] = useState("es");
   const [profile, setProfile] = useState(null);
@@ -17,17 +19,17 @@ function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  // --- INICIO DE LA MODIFICACIÓN ---
-  // Reemplaza 'tudominio.com' con tu dominio real.
-  const API_BASE_URL = "http://localhost:8000/api/";
-  // --- FIN DE LA MODIFICACIÓN ---
-
   useEffect(() => {
+    if (!API_BASE_URL) {
+      console.error("Error: VITE_API_URL no está definida en tus archivos .env");
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         setLoading(true);
 
-        // Usamos la nueva URL base para todas las peticiones
         const profileRes = await fetch(
           `${API_BASE_URL}/profile.php?lang=${language}`
         );

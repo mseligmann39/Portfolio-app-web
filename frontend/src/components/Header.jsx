@@ -1,25 +1,26 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import styles from "./Header.module.css";
 
-function Header({ language, setLanguage, navLinks = [], profileName }) {
+function Header({ language, setLanguage, navLinks = [] }) {
   const handleLanguageChange = () => {
-    const newLanguage = language === 'es' ? 'en' : 'es';
+    const newLanguage = language === "es" ? "en" : "es";
     setLanguage(newLanguage);
   };
 
   return (
-    <header className="header">
-      <div className="logo">
+    <header className={styles.header}>
+      <div className={styles.logo}>
         <NavLink to="/">
-          <img src="/LOGO.png" alt="Logo" className="header-logo" />
+          <img src="/LOGO.png" alt="Logo" className={styles.headerLogo} />
         </NavLink>
       </div>
       <nav>
-        <ul className="nav-links">
+        <ul className={styles.navLinks}>
           {navLinks.map((link) => (
             <li key={link.to}>
-              <NavLink 
+              <NavLink
                 to={link.to}
-                className={({ isActive }) => isActive ? 'active' : ''}
+                className={({ isActive }) => (isActive ? styles.active : "")}
               >
                 {link.text}
               </NavLink>
@@ -27,9 +28,9 @@ function Header({ language, setLanguage, navLinks = [], profileName }) {
           ))}
         </ul>
       </nav>
-      <div className="lang-switcher">
+      <div className={styles.langSwitcher}>
         <button onClick={handleLanguageChange}>
-          {language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+          {language === "es" ? "Switch to English" : "Cambiar a Español"}
         </button>
       </div>
     </header>
