@@ -3,7 +3,7 @@ import styles from "./About.module.css";
 
 function About({ profile, content }) {
   const description = profile?.aboutText || "";
-  const typedDescription = useTypewriter(description, 25);
+  const typedDescription = useTypewriter(description, 5);
 
   return (
     <section className={styles.aboutContainer}>
