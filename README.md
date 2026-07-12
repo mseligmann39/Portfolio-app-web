@@ -33,7 +33,7 @@ Portfolio-app-web/
 ├── index.html
 ├── src/
 │   ├── App.jsx             # Estructura de la SPA e importación de secciones
-│   ├── data.json           # Base de datos local (textos, proyectos, experiencia)
+│   ├── i18n/               # Carpetas de idiomas (es.json, en.json)
 │   ├── index.css           # Estilos y variables CSS globales (temas y tipografía)
 │   ├── components/         # Componentes comunes (Header, Footer)
 │   ├── pages/              # Secciones principales (Home, About, Experience, Projects, Skills, Contact)
@@ -77,7 +77,9 @@ Sigue estos sencillos pasos para levantar el entorno de desarrollo local. No nec
 
 ## ✏️ Cómo Personalizar el Contenido
 
-Para añadir proyectos, cambiar tu correo, modificar las tecnologías o actualizar el texto de "Sobre mí", solo tienes que editar el archivo:
-📄 [src/data.json](file:///home/maxi/projects/Portfolio-app-web/src/data.json)
+Para añadir proyectos, cambiar tu correo, modificar las tecnologías o actualizar el texto de "Sobre mí", solo tienes que editar los archivos de idioma dentro del directorio:
+📁 [src/i18n/](file:///home/maxi/projects/Portfolio-app-web/src/i18n/)
+*   `es.json`: Contenido para la versión en Español.
+*   `en.json`: Contenido para la versión en Inglés.
 
-El archivo está estructurado con bloques para inglés (`en`), español (`es`), información de perfil (`profile`), lista de habilidades (`skills`), proyectos (`projects`) e historial (`experience`). Las modificaciones que guardes allí se verán reflejadas instantáneamente en tu web.
+Cada archivo contiene estructuras claras para la navegación (`nav`), información del perfil (`profile`), lista de habilidades (`skills`), proyectos (`projects`) e historial (`experience`). Las modificaciones que guardes allí se verán reflejadas instantáneamente en tu web al cambiar de idioma.

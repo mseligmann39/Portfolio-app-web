@@ -1,9 +1,9 @@
 import styles from "./Home.module.css";
 
-function Home({ profile, language }) {
+function Home({ profile }) {
   if (!profile) return null;
 
-  const subtitle = profile.subtitle[language] || profile.subtitle.es;
+  const subtitle = profile.subtitle;
 
   return (
     <div className={styles.homeContainer}>

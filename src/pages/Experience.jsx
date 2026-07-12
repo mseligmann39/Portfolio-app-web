@@ -1,6 +1,6 @@
 import styles from "./Experience.module.css";
 
-function Experience({ experience, content, language }) {
+function Experience({ experience, content }) {
   if (!experience || experience.length === 0) return null;
 
   return (
@@ -10,12 +10,12 @@ function Experience({ experience, content, language }) {
         {experience.map((item) => (
           <div key={item.id} className={styles.timelineItem}>
             <div className={styles.timelineHeader}>
-              <h3 className={styles.role}>{item.role[language] || item.role.es}</h3>
-              <span className={styles.period}>{item.period[language] || item.period.es}</span>
+              <h3 className={styles.role}>{item.role}</h3>
+              <span className={styles.period}>{item.period}</span>
             </div>
             <h4 className={styles.company}>{item.company}</h4>
             <p className={styles.description}>
-              {item.description[language] || item.description.es}
+              {item.description}
             </p>
           </div>
         ))}

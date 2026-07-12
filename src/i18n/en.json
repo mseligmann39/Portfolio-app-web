@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "titles": {
+    "about": "About Me",
+    "experience": "Work Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "skillsText": "These are some of the technologies and tools I have worked with.",
+    "contactText": "You can contact me through the following links or by sending an email directly:",
+    "footerText": "© 2026 - Maximiliano Seligmann. All rights reserved."
+  },
+  "profile": {
+    "name": "Maximiliano Seligmann",
+    "contactEmail": "seligmannmaximiliano@gmail.com",
+    "contactGitHub": "https://github.com/mseligmann39",
+    "contactLinkedIn": "https://www.linkedin.com/in/maximiliano-seligmann/",
+    "subtitle": "Web Developer | Full Stack | Python | PHP | React",
+    "aboutText": "I am a passionate web developer who loves programming and creating modern, functional solutions. I discovered my interest in programming during my first year studying Computer Science at Facultad de Ciencias Exactas, Ingeniería y Agrimensura, UNR (Rosario, Argentina). For personal reasons, I relocated to Spain, where I completed a Full Stack development course to continue learning. Currently, I am studying Web Application Development and actively looking for internship and professional opportunities to add value to real-world projects. Meanwhile, I build independent solutions such as web scrapers, automations, and responsive web applications."
+  },
+  "skills": [
+    "React",
+    "Node.js",
+    "JavaScript (ES6+)",
+    "Python",
+    "Django",
+    "Java / Spring Boot",
+    "PHP / Laravel",
+    "HTML5 / CSS3",
+    "MySQL / SQLite",
+    "Git / GitHub"
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "role": "Freelance Web Developer / Independent Projects",
+      "company": "Self-employed",
+      "period": "2024 - Present",
+      "description": "Creation of web scrapers and automated bots using Python and Selenium. Development of full-stack management applications with React, Django, Laravel, and Spring Boot, connected to relational databases."
+    },
+    {
+      "id": 2,
+      "role": "Web Application Development Student",
+      "company": "DAW Studies Center (Spain)",
+      "period": "2023 - Present",
+      "description": "Official training in web interface design, server programming (PHP, Java), markup languages, databases, and application deployment."
+    }
+  ],
+  "projects": [
+    {
+      "id": 6,
+      "emoji": "🚀",
+      "technologies": ["PHP", "Laravel", "React", "Vite", "SQLite", "Axios", "CSS Moderno"],
+      "repository_url": "https://github.com/mseligmann39/guias",
+      "demo_url": "https://tguias.seligmann.es/",
+      "image_url": "https://imgur.com/4eLcpUq.png",
+      "title": "TGUIAS",
+      "description": "A video game guide platform. It is a full-stack web application designed for users to consult guides, achievements, and other relevant information about video games.",
+      "status": "in progress",
+      "category": "Web Application"
+    },
+    {
+      "id": 5,
+      "emoji": "👨‍💻",
+      "technologies": ["PHP", "MySQL", "React", "CSS", "Vite"],
+      "repository_url": "https://github.com/mseligmann39/Portfolio-app-web",
+      "demo_url": "https://maxi.seligmann.es/",
+      "image_url": "https://imgur.com/XTgF7kg.png",
+      "title": "This Dynamic Portfolio",
+      "description": "Web application of this portfolio, built with reactive components and instant multilingual support.",
+      "status": "finished",
+      "category": "Web Application"
+    },
+    {
+      "id": 4,
+      "emoji": "💳",
+      "technologies": ["Java", "Spring Boot", "Angular", "MySQL"],
+      "repository_url": "https://github.com/mseligmann39/Springboot-Angular",
+      "demo_url": null,
+      "image_url": "https://imgur.com/9wVUKbN.png",
+      "title": "Banking Application",
+      "description": "A basic banking application with a Spring Boot backend and Angular frontend, connected to MySQL.",
+      "status": "finished",
+      "category": "Web Application"
+    },
+    {
+      "id": 3,
+      "emoji": "🏋️‍♂️",
+      "technologies": ["Python", "Django", "React", "API REST"],
+      "repository_url": "https://github.com/mseligmann39/gymtrack",
+      "demo_url": null,
+      "image_url": "https://imgur.com/423awvO.png",
+      "title": "Gym Routine Manager",
+      "description": "A web application to create and manage workout routines with a Django REST API and React frontend.",
+      "status": "in progress",
+      "category": "Web Application"
+    },
+    {
+      "id": 2,
+      "emoji": "♟️",
+      "technologies": ["Python"],
+      "repository_url": "https://github.com/mseligmann39/Ajedrez-Chess-python",
+      "demo_url": null,
+      "image_url": "https://imgur.com/x8usjjq.png",
+      "title": "Chess Engine",
+      "description": "A Python chess engine with checkmate detection and full game logic, playable in the console.",
+      "status": "finished",
+      "category": "Algorithms / Games"
+    },
+    {
+      "id": 1,
+      "emoji": "📦",
+      "technologies": ["Python", "Selenium", "Twilio API"],
+      "repository_url": "https://github.com/mseligmann39/amazon-telegram-price-bot",
+      "demo_url": null,
+      "image_url": "https://imgur.com/QbxYPHn.png",
+      "title": "Amazon Price Tracker",
+      "description": "A Python scraper that gets prices from Amazon and sends automatic notifications via Telegram.",
+      "status": "finished",
+      "category": "Web Scraping"
+    }
+  ]
+}

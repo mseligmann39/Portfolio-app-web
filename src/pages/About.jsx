@@ -1,8 +1,8 @@
 import useTypewriter from "../hooks/useTypewriter";
 import styles from "./About.module.css";
 
-function About({ profile, content, language }) {
-  const description = profile?.aboutText[language] || profile?.aboutText.es || "";
+function About({ profile, content }) {
+  const description = profile?.aboutText || "";
   const typedDescription = useTypewriter(description, 25);
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Projects.module.css";
 
-function Projects({ projects, content, language }) {
+function Projects({ projects, content }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openModal = (imageUrl) => setSelectedImage(imageUrl);
@@ -18,9 +18,9 @@ function Projects({ projects, content, language }) {
             return 0;
           })
           .map((project) => {
-            const title = project.title[language] || project.title.es;
-            const description = project.description[language] || project.description.es;
-            const status = project.status[language] || project.status.es;
+            const title = project.title;
+            const description = project.description;
+            const status = project.status;
             const isDevelopment = status === "en desarrollo" || status === "in progress";
 
             return (

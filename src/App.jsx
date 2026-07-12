@@ -7,29 +7,32 @@ import Experience from "./pages/Experience";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
-import data from "./data.json";
+import es from "./i18n/es.json";
+import en from "./i18n/en.json";
+
+const translations = { es, en };
 
 function App() {
   const [language, setLanguage] = useState("es");
+  const data = translations[language];
 
-  const content = data[language];
   const profile = data.profile;
   const projects = data.projects;
   const skills = data.skills;
   const experience = data.experience;
+  const nav = data.nav;
+  const titles = data.titles;
 
-  const navLinks = content.navAbout
-    ? [
-        { to: "#home", text: data[language].navAbout ? "Inicio" : "Home" }, // Home/Inicio
-        { to: "#about", text: content.navAbout },
-        { to: "#experience", text: content.navExperience || "Experiencia" },
-        { to: "#projects", text: content.navProjects },
-        { to: "#skills", text: content.navSkills },
-        { to: "#contact", text: content.navContact },
-      ]
-    : [];
+  const navLinks = [
+    { to: "#home", text: nav.home },
+    { to: "#about", text: nav.about },
+    { to: "#experience", text: nav.experience },
+    { to: "#projects", text: nav.projects },
+    { to: "#skills", text: nav.skills },
+    { to: "#contact", text: nav.contact },
+  ];
 
-  const footerText = content.footerText;
+  const footerText = titles.footerText;
 
   return (
     <>
@@ -44,19 +47,19 @@ function App() {
           <Home profile={profile} language={language} />
         </section>
         <section id="about">
-          <About profile={profile} content={content} language={language} />
+          <About profile={profile} content={titles} language={language} />
         </section>
         <section id="experience">
-          <Experience experience={experience} content={content} language={language} />
+          <Experience experience={experience} content={titles} language={language} />
         </section>
         <section id="projects">
-          <Projects projects={projects} content={content} language={language} />
+          <Projects projects={projects} content={titles} language={language} />
         </section>
         <section id="skills">
-          <Skills skills={skills} content={content} />
+          <Skills skills={skills} content={titles} />
         </section>
         <section id="contact">
-          <Contact content={content} profile={profile} />
+          <Contact content={titles} profile={profile} />
         </section>
       </main>
       <Footer footerText={footerText} profile={profile} />
