@@ -27,19 +27,18 @@ Un portfolio de desarrollador web moderno, limpio y responsive construido con **
 
 ## 📂 Estructura del Proyecto
 
-El proyecto está simplificado para contener únicamente el frontend estático:
+El proyecto está simplificado para contener únicamente el frontend estático en el directorio raíz:
 ```text
 Portfolio-app-web/
-└── frontend/
-    ├── index.html
-    ├── src/
-    │   ├── App.jsx             # Estructura de la SPA e importación de secciones
-    │   ├── data.json           # Base de datos local (textos, proyectos, experiencia)
-    │   ├── index.css           # Estilos y variables CSS globales (temas y tipografía)
-    │   ├── components/         # Componentes comunes (Header, Footer)
-    │   ├── pages/              # Secciones principales (Home, About, Experience, Projects, Skills, Contact)
-    │   └── hooks/              # Funciones auxiliares personalizadas (useTypewriter)
-    └── package.json
+├── index.html
+├── src/
+│   ├── App.jsx             # Estructura de la SPA e importación de secciones
+│   ├── data.json           # Base de datos local (textos, proyectos, experiencia)
+│   ├── index.css           # Estilos y variables CSS globales (temas y tipografía)
+│   ├── components/         # Componentes comunes (Header, Footer)
+│   ├── pages/              # Secciones principales (Home, About, Experience, Projects, Skills, Contact)
+│   └── hooks/              # Funciones auxiliares personalizadas (useTypewriter)
+└── package.json
 ```
 
 ---
@@ -55,11 +54,7 @@ Sigue estos sencillos pasos para levantar el entorno de desarrollo local. No nec
 ### **Instalación y Configuración**
 
 1. **Clona el repositorio** en tu ordenador.
-2. **Accede a la carpeta del frontend**:
-   ```sh
-   cd frontend
-   ```
-3. **Instala las dependencias**:
+2. **Instala las dependencias** directamente en la raíz:
    ```sh
    npm install
    ```
@@ -76,13 +71,13 @@ Sigue estos sencillos pasos para levantar el entorno de desarrollo local. No nec
   ```sh
   npm run build
   ```
-  Esto creará una carpeta llamada `dist/` en la raíz del frontend que contiene el HTML, CSS y JS comprimidos. Esta carpeta está lista para ser subida de forma **100% gratuita** a plataformas como **Vercel, Netlify, GitHub Pages o Cloudflare Pages**.
+  Esto creará una carpeta llamada `dist/` en la raíz del proyecto que contiene el HTML, CSS y JS comprimidos. Esta carpeta está lista para ser subida de forma **100% gratuita** a plataformas como **Vercel, Netlify, GitHub Pages o Cloudflare Pages**.
 
 ---
 
 ## ✏️ Cómo Personalizar el Contenido
 
 Para añadir proyectos, cambiar tu correo, modificar las tecnologías o actualizar el texto de "Sobre mí", solo tienes que editar el archivo:
-📄 [frontend/src/data.json](file:///home/maxi/projects/Portfolio-app-web/frontend/src/data.json)
+📄 [src/data.json](file:///home/maxi/projects/Portfolio-app-web/src/data.json)
 
 El archivo está estructurado con bloques para inglés (`en`), español (`es`), información de perfil (`profile`), lista de habilidades (`skills`), proyectos (`projects`) e historial (`experience`). Las modificaciones que guardes allí se verán reflejadas instantáneamente en tu web.
