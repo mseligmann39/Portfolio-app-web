@@ -1,92 +1,107 @@
 .projectsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .projectCard {
   background-color: var(--card-bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
 .projectCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(230, 57, 70, 0.25);
+  background-color: rgba(17, 24, 39, 0.85);
 }
 
-.status-en-desarrollo,
-.status-in-progress {
-  border-left: 4px solid var(--border-color-dev);
+.status-en-desarrollo {
+  border-top: 4px solid var(--border-color-dev);
 }
 
-.status-finalizado,
-.status-finished {
-  border-left: 4px solid var(--border-color-done);
+.status-finalizado {
+  border-top: 4px solid var(--border-color-done);
 }
 
 .projectImage {
   width: 100%;
   height: 200px;
-  object-fit: contain;
-  background-color: #222;
-  transition: transform 0.3s ease;
+  object-fit: cover;
+  background-color: #0b0f19;
+  transition: all 0.4s ease;
   cursor: zoom-in;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .projectCard:hover .projectImage {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .projectContent {
-  padding: 1.5rem;
+  padding: 1.75rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .projectTitle {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
   color: var(--primary-text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .projectStatusTag {
-  display: inline-block;
-  background-color: var(--accent-color);
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-left: 10px;
-  vertical-align: middle;
+  background-color: rgba(230, 57, 70, 0.15);
+  color: #ff5f6d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .projectTechnologies {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .techTag {
-  background-color: var(--accent-color-hover);
-  color: var(--primary-text-color);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--secondary-text-color);
   padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover .techTag {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--primary-text-color);
 }
 
 .projectDescription {
   font-size: 0.95rem;
-  color: #b0b0b0;
+  line-height: 1.7;
+  color: var(--secondary-text-color);
   flex-grow: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .projectLinks {
@@ -96,25 +111,47 @@
 }
 
 .projectLinks a {
-  background-color: transparent;
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-transform: uppercase;
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  border-radius: 50px;
   font-weight: 600;
-  font-size: 0.8rem;
-  transition: background-color 0.3s, color 0.3s;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-.projectLinks a:hover {
-  background-color: var(--accent-color);
+/* Demo is primary button */
+.projectLinks a:not(:last-child) {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+}
+
+.projectLinks a:not(:last-child):hover {
+  box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Repo is secondary outline button */
+.projectLinks a:last-child {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--primary-text-color);
 }
 
+.projectLinks a:last-child:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-text-color);
+}
+
 .contactIcon {
-  vertical-align: middle;
-  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
 }
 
 /* === IMAGE MODAL === */
@@ -124,58 +161,60 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(7, 10, 18, 0.9);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  cursor: pointer;
+  cursor: zoom-out;
   animation: fadeIn 0.3s ease;
 }
 
 .imageModalContent {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  animation: fadeInUp 0.3s ease;
+  max-width: 85vw;
+  max-height: 85vh;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .imageModalContent img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: contain;
-  border-radius: 8px;
 }
 
 .closeModalButton {
   position: absolute;
-  top: -15px;
-  right: -15px;
+  top: 15px;
+  right: 15px;
   background-color: var(--accent-color);
   color: white;
-  border: 2px solid var(--bg-color);
+  border: none;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.8rem;
-  line-height: 32px;
-  text-align: center;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .closeModalButton:hover {
   background-color: var(--accent-color-hover);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(90deg);
 }
 
 @media (max-width: 768px) {
-  .closeModalButton {
-    width: 30px;
-    height: 30px;
-    font-size: 1.5rem;
-    line-height: 28px;
-    top: -10px;
-    right: -10px;
+  .projectsGrid {
+    grid-template-columns: 1fr;
   }
 }

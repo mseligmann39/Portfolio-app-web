@@ -1,22 +1,6 @@
-import { useOutletContext } from "react-router-dom";
 import styles from "./Skills.module.css";
 
-function Skills() {
-  const { content } = useOutletContext();
-
-  // Usamos la lista de ejemplo como antes
-  const skills = [
-    "React",
-    "Node.js",
-    "JavaScript (ES6+)",
-    "Python",
-    "MongoDB",
-    "Express",
-    "HTML5",
-    "CSS3",
-    "Git",
-    "API REST",
-  ];
+function Skills({ skills, content }) {
 
   return (
     <section>

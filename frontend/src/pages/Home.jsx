@@ -1,18 +1,9 @@
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
 import styles from "./Home.module.css";
 
-function Home() {
-  const { profile } = useOutletContext();
-
-  useEffect(() => {
-    document.body.classList.add("no-scroll");
-    return () => {
-      document.body.classList.remove("no-scroll");
-    };
-  }, []);
-
+function Home({ profile, language }) {
   if (!profile) return null;
+
+  const subtitle = profile.subtitle[language] || profile.subtitle.es;
 
   return (
     <div className={styles.homeContainer}>
@@ -26,7 +17,7 @@ function Home() {
         className={`${styles.subtitle} fade-in-up-animation`}
         style={{ animationDelay: "0.5s" }}
       >
-        {profile.subtitle}
+        {subtitle}
       </p>
     </div>
   );

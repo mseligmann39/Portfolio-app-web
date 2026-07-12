@@ -1,21 +1,38 @@
 .skillsList {
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 0; /* Aseguramos que no tenga padding por defecto */
+  gap: 1.25rem;
+  list-style: none;
+  margin-top: 2.5rem;
 }
 
 .skillsList li {
   background-color: var(--card-bg-color);
   border: 1px solid var(--border-color);
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s, transform 0.3s;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  cursor: default;
 }
 
 .skillsList li:hover {
   transform: translateY(-3px);
-  background-color: var(--accent-color);
+  background-color: rgba(230, 57, 70, 0.05);
+  border-color: rgba(230, 57, 70, 0.4);
+  color: var(--accent-color);
+  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.15);
+}
+
+@media (max-width: 576px) {
+  .skillsList {
+    gap: 0.75rem;
+  }
+  .skillsList li {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
 }

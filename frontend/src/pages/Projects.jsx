@@ -1,58 +1,61 @@
-import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
 import styles from "./Projects.module.css";
 
-function Projects() {
-  const { projects, content } = useOutletContext();
+function Projects({ projects, content, language }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openModal = (imageUrl) => setSelectedImage(imageUrl);
   const closeModal = () => setSelectedImage(null);
 
   return (
-    <section>
+    <section id="projects">
       <h2>{content.projectsTitle || "Proyectos"}</h2>
       <div className={styles.projectsGrid}>
         {[...projects]
           .sort((a, b) => {
-            if (a._id > b._id) return -1;
-            if (a._id < b._id) return 1;
+            if (a.id > b.id) return -1;
+            if (a.id < b.id) return 1;
             return 0;
           })
-          .map((project) => (
-            <div
-              key={project._id}
-              className={`${styles.projectCard} ${
-                styles[`status-${project.status.replace(" ", "-")}`]
-              }`}
-            >
-              <img
-                src={project.image_url}
-                alt={`${project.title} screenshot`}
-                className={styles.projectImage}
-                onClick={() => openModal(project.image_url)}
-              />
-              <div className={styles.projectContent}>
-                <h3 className={styles.projectTitle}>
-                  {project.title}
-                  {(project.status === "en desarrollo" ||
-                    project.status === "in progress") && (
-                    <span className={styles.projectStatusTag}>
-                      {project.status}
-                    </span>
-                  )}
-                </h3>
-                <div className={styles.projectTechnologies}>
-                  {project.technologies &&
-                    project.technologies.map((tech) => (
-                      <span key={tech} className={styles.techTag}>
-                        {tech}
+          .map((project) => {
+            const title = project.title[language] || project.title.es;
+            const description = project.description[language] || project.description.es;
+            const status = project.status[language] || project.status.es;
+            const isDevelopment = status === "en desarrollo" || status === "in progress";
+
+            return (
+              <div
+                key={project.id}
+                className={`${styles.projectCard} ${
+                  isDevelopment ? styles["status-en-desarrollo"] : styles["status-finalizado"]
+                }`}
+              >
+                <img
+                  src={project.image_url}
+                  alt={`${title} screenshot`}
+                  className={styles.projectImage}
+                  onClick={() => openModal(project.image_url)}
+                />
+                <div className={styles.projectContent}>
+                  <h3 className={styles.projectTitle}>
+                    {title}
+                    {isDevelopment && (
+                      <span className={styles.projectStatusTag}>
+                        {status}
                       </span>
-                    ))}
-                </div>
-                <p className={styles.projectDescription}>
-                  {project.description}
-                </p>
+                    )}
+                  </h3>
+                  <div className={styles.projectTechnologies}>
+                    {project.technologies &&
+                      project.technologies.map((tech) => (
+                        <span key={tech} className={styles.techTag}>
+                          {tech}
+                        </span>
+                      ))}
+                  </div>
+                  <p className={styles.projectDescription}>
+                    {description}
+                  </p>
                 <div className={styles.projectLinks}>
                   {project.demo_url && (
                     <a
@@ -85,7 +88,8 @@ function Projects() {
                 </div>
               </div>
             </div>
-          ))}
+          );
+        })}
       </div>
 
       {selectedImage && (

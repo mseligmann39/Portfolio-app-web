@@ -1,79 +1,35 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Loader from "./components/Loader";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Experience from "./pages/Experience";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://apimaxi.seligmann.es/api/";
+import data from "./data.json";
 
 function App() {
   const [language, setLanguage] = useState("es");
-  const [profile, setProfile] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [content, setContent] = useState({});
-  const [loading, setLoading] = useState(true);
-  const location = useLocation();
 
-  useEffect(() => {
-    if (!API_BASE_URL) {
-      console.error("Error: VITE_API_URL no está definida en tus archivos .env");
-      setLoading(false);
-      return;
-    }
-
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-
-        const profileRes = await fetch(
-          `${API_BASE_URL}profile.php?lang=${language}`
-        );
-        const profileData = await profileRes.json();
-        setProfile(profileData);
-
-        const projectsRes = await fetch(
-          `${API_BASE_URL}projects.php?lang=${language}`
-        );
-        const projectsData = await projectsRes.json();
-        setProjects(projectsData);
-
-        const contentRes = await fetch(
-          `${API_BASE_URL}content.php?lang=${language}`
-        );
-        const contentData = await contentRes.json();
-        setContent(contentData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [language]);
+  const content = data[language];
+  const profile = data.profile;
+  const projects = data.projects;
+  const skills = data.skills;
+  const experience = data.experience;
 
   const navLinks = content.navAbout
     ? [
-        { to: "/about", text: content.navAbout },
-        { to: "/projects", text: content.navProjects },
-        { to: "/skills", text: content.navSkills },
-        { to: "/contact", text: content.navContact },
+        { to: "#home", text: data[language].navAbout ? "Inicio" : "Home" }, // Home/Inicio
+        { to: "#about", text: content.navAbout },
+        { to: "#experience", text: content.navExperience || "Experiencia" },
+        { to: "#projects", text: content.navProjects },
+        { to: "#skills", text: content.navSkills },
+        { to: "#contact", text: content.navContact },
       ]
     : [];
 
-  const footerText = profile?.name
-    ? content.footerText?.replace("Maximiliano Seligmann", profile.name)
-    : content.footerText;
-
-  if (loading) {
-    return <Loader language={language} />;
-  }
+  const footerText = content.footerText;
 
   return (
     <>
@@ -83,21 +39,25 @@ function App() {
         navLinks={navLinks}
         profileName={profile?.name}
       />
-      <main key={location.pathname} className="page-enter">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Outlet context={{ profile, projects, content, language }} />
-            }
-          >
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="skills" element={<Skills />} />
-            <Route path="contact" element={<Contact />} />
-          </Route>
-        </Routes>
+      <main className="page-container">
+        <section id="home">
+          <Home profile={profile} language={language} />
+        </section>
+        <section id="about">
+          <About profile={profile} content={content} language={language} />
+        </section>
+        <section id="experience">
+          <Experience experience={experience} content={content} language={language} />
+        </section>
+        <section id="projects">
+          <Projects projects={projects} content={content} language={language} />
+        </section>
+        <section id="skills">
+          <Skills skills={skills} content={content} />
+        </section>
+        <section id="contact">
+          <Contact content={content} profile={profile} />
+        </section>
       </main>
       <Footer footerText={footerText} profile={profile} />
     </>

@@ -1,9 +1,6 @@
-import { useOutletContext } from "react-router-dom";
 import styles from "./Contact.module.css";
 
-function Contact() {
-  const { content, profile } = useOutletContext();
-
+function Contact({ content, profile }) {
   const contactText = content.contactText || "";
 
   return (
@@ -49,7 +46,27 @@ function Contact() {
             </svg>
           </a>
         )}
-        {/* Repite el patrón para LinkedIn... */}
+        {profile?.contactLinkedIn && (
+          <a
+            href={profile.contactLinkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className={styles.contactIcon}
+            >
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        )}
       </div>
     </section>
   );

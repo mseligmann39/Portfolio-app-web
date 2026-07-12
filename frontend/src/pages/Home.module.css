@@ -1,29 +1,47 @@
-
-.container {
+.homeContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 80vh;
   text-align: center;
-  /* Ocupa toda la altura de la ventana */
-  height: 100vh;
-  /* Evita el scroll dentro del contenedor si el contenido se desborda */
-  overflow: hidden;
-  /* Centra el contenido verticalmente, considerando que no habrá scroll */
-  padding-bottom: 158px; /* Ajuste para compensar header/footer si fuera necesario, pero con vh es mejor manejarlo en el layout principal */
+  padding: 2rem 1rem;
+  position: relative;
 }
 
 .name {
   font-size: 4.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  /* La animación ya no necesita estar en style.css */
+  font-weight: 800;
+  line-height: 1.1;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
 }
 
 .subtitle {
   font-size: 1.5rem;
-  font-weight: 300;
-  color: #b0b0b0;
+  color: var(--secondary-text-color);
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  background: linear-gradient(to right, #ffffff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Clases para las animaciones que ya estaban en Home.jsx */
+@media (max-width: 768px) {
+  .homeContainer {
+    min-height: 60vh;
+  }
+  .name {
+    font-size: 3rem;
+  }
+  .subtitle {
+    font-size: 1.15rem;
+  }
+}

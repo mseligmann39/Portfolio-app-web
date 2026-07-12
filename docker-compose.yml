@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: portfolio-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: maxi_portfolio
+      MYSQL_ROOT_PASSWORD: portfolio_root_password
+      MYSQL_USER: portfolio_user
+      MYSQL_PASSWORD: portfolio_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - /home/maxi/Downloads/u514741126_maxi_portfolio.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: portfolio-backend
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+
+volumes:
+  db_data:
