@@ -52,9 +52,7 @@ function App() {
         <section id="experience">
           <Experience experience={experience} content={titles} language={language} />
         </section>
-        <section id="projects">
-          <Projects projects={projects} content={titles} language={language} />
-        </section>
+        <Projects projects={projects} content={titles} language={language} />
         <section id="skills">
           <Skills skills={skills} content={titles} />
         </section>

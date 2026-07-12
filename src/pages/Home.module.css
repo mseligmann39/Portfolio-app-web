@@ -10,22 +10,23 @@
 }
 
 .name {
-  font-size: 4.5rem;
+  font-size: 5.2rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.25;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   letter-spacing: -0.03em;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  padding-bottom: 0.15em; /* Gives extra space at the bottom to prevent letters like "g" from being clipped */
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--secondary-text-color);
   font-weight: 400;
-  max-width: 600px;
+  max-width: 700px;
   line-height: 1.6;
   letter-spacing: -0.01em;
   margin-top: 0;
@@ -39,9 +40,11 @@
     min-height: 60vh;
   }
   .name {
-    font-size: 3rem;
+    font-size: 3.4rem;
+    line-height: 1.25;
+    padding-bottom: 0.15em;
   }
   .subtitle {
-    font-size: 1.15rem;
+    font-size: 1.35rem;
   }
 }
