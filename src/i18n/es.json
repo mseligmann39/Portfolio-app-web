@@ -29,27 +29,39 @@
     "React",
     "Node.js",
     "JavaScript (ES6+)",
+    "Angular",
+    "TypeScript",
+    "Bootstrap",
+    "CSS",
+    "Tailwind CSS",
+    "HTML5",
     "Python",
     "Django",
     "Java / Spring Boot",
     "PHP / Laravel",
-    "HTML5 / CSS3",
     "MySQL / SQLite",
     "Git / GitHub"
   ],
   "experience": [
     {
-      "id": 1,
-      "role": "Desarrollador Web Freelance / Proyectos Propios",
-      "company": "Autónomo",
-      "period": "2024 - Presente",
-      "description": "Creación de scrapers web y bots automatizados con Python y Selenium. Desarrollo de aplicaciones de gestión full-stack con React, Django, Laravel y Spring Boot, conectadas a bases de datos relacionales."
+      "id": 3,
+      "role": "Desarrollador Web",
+      "company": "LEVANTE GAMING SL",
+      "period": "Mayo 2026 - Actualidad",
+      "description": "Desarrollo de aplicaciones web con Phaser 3 consumiendo APIs REST, así como el diseño, desarrollo y mantenimiento de aplicaciones web full-stack utilizando Angular (TypeScript), Java con Spring Boot, Docker y PostgreSQL."
     },
     {
       "id": 2,
+      "role": "Proyectos Propios",
+      "company": "Autónomo",
+      "period": "2023 - Actualidad",
+      "description": "Creación de scrapers web y bots automatizados con Python y Selenium. Desarrollo de aplicaciones de gestión full-stack con React, Django, Laravel y Spring Boot, conectadas a bases de datos relacionales."
+    },
+    {
+      "id": 1,
       "role": "Estudiante de Desarrollo de Aplicaciones Web (DAW)",
       "company": "Centro de Estudios DAW (España)",
-      "period": "2023 - Presente",
+      "period": "2023 - 2025",
       "description": "Formación oficial en diseño de interfaces web, programación de servidores (PHP, Java), lenguajes de marcas, bases de datos y despliegue de aplicaciones."
     }
   ],
@@ -57,7 +69,15 @@
     {
       "id": 6,
       "emoji": "🚀",
-      "technologies": ["PHP", "Laravel", "React", "Vite", "SQLite", "Axios", "CSS Moderno"],
+      "technologies": [
+        "PHP",
+        "Laravel",
+        "React",
+        "Vite",
+        "SQLite",
+        "Axios",
+        "CSS Moderno"
+      ],
       "repository_url": "https://github.com/mseligmann39/guias",
       "demo_url": "https://tguias.seligmann.es/",
       "image_url": "https://imgur.com/4eLcpUq.png",
@@ -69,7 +89,13 @@
     {
       "id": 5,
       "emoji": "👨‍💻",
-      "technologies": ["PHP", "MySQL", "React", "CSS", "Vite"],
+      "technologies": [
+        "PHP",
+        "MySQL",
+        "React",
+        "CSS",
+        "Vite"
+      ],
       "repository_url": "https://github.com/mseligmann39/Portfolio-app-web",
       "demo_url": "https://maxi.seligmann.es/",
       "image_url": "https://imgur.com/XTgF7kg.png",
@@ -81,7 +107,12 @@
     {
       "id": 4,
       "emoji": "💳",
-      "technologies": ["Java", "Spring Boot", "Angular", "MySQL"],
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Angular",
+        "MySQL"
+      ],
       "repository_url": "https://github.com/mseligmann39/Springboot-Angular",
       "demo_url": null,
       "image_url": "https://imgur.com/9wVUKbN.png",
@@ -93,7 +124,12 @@
     {
       "id": 3,
       "emoji": "🏋️‍♂️",
-      "technologies": ["Python", "Django", "React", "API REST"],
+      "technologies": [
+        "Python",
+        "Django",
+        "React",
+        "API REST"
+      ],
       "repository_url": "https://github.com/mseligmann39/gymtrack",
       "demo_url": null,
       "image_url": "https://imgur.com/423awvO.png",
@@ -105,7 +141,9 @@
     {
       "id": 2,
       "emoji": "♟️",
-      "technologies": ["Python"],
+      "technologies": [
+        "Python"
+      ],
       "repository_url": "https://github.com/mseligmann39/Ajedrez-Chess-python",
       "demo_url": null,
       "image_url": "https://imgur.com/x8usjjq.png",
@@ -117,7 +155,11 @@
     {
       "id": 1,
       "emoji": "📦",
-      "technologies": ["Python", "Selenium", "Twilio API"],
+      "technologies": [
+        "Python",
+        "Selenium",
+        "Twilio API"
+      ],
       "repository_url": "https://github.com/mseligmann39/amazon-telegram-price-bot",
       "demo_url": null,
       "image_url": "https://imgur.com/QbxYPHn.png",

@@ -39,14 +39,21 @@
   ],
   "experience": [
     {
-      "id": 1,
+      "id": 3,
+      "role": "Web Developer",
+      "company": "LEVANTE GAMING SL",
+      "period": "May 2026 - Present",
+      "description": "Development of web applications with Phaser 3 consuming REST APIs, as well as the design, development, and maintenance of full-stack web applications using Angular (TypeScript), Java with Spring Boot, Docker, and PostgreSQL."
+    },
+    {
+      "id": 2,
       "role": "Freelance Web Developer / Independent Projects",
       "company": "Self-employed",
       "period": "2024 - Present",
       "description": "Creation of web scrapers and automated bots using Python and Selenium. Development of full-stack management applications with React, Django, Laravel, and Spring Boot, connected to relational databases."
     },
     {
-      "id": 2,
+      "id": 1,
       "role": "Web Application Development Student",
       "company": "DAW Studies Center (Spain)",
       "period": "2023 - Present",
