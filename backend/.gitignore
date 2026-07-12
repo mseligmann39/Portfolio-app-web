@@ -1,6 +1,0 @@
-# Ignorar la carpeta de dependencias de Composer
-/vendor
-
-# Ignorar el archivo de configuración con datos sensibles
-config.php
-.DS_Store

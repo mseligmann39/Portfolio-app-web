@@ -1,74 +1,88 @@
-# Portfolio Personal Full-Stack (React + PHP)
+# Portfolio Personal - React + Vite (Estático & Premium)
 
-Portfolio de desarrollador web full-stack creado con React para el frontend y una API REST en PHP con MySQL para el backend. Presenta proyectos, habilidades y perfil de forma dinámica y multilingüe.
+Un portfolio de desarrollador web moderno, limpio y responsive construido con **React** y **Vite**. Está diseñado como una SPA (Single Page Application) estática sin servidor, optimizada para ofrecer un rendimiento ultra-rápido, soporte multilingüe dinámico (ES/EN) cargado localmente, y una estética visual de gama alta.
 
 **[➡️ Ver Demo en Vivo](https://maxi.seligmann.es)**
 
+---
+
 ## ✨ Características Principales
 
-- **Frontend Dinámico con React:** Interfaz de usuario moderna y reactiva construida con React y Vite.
-- **Backend Robusto con PHP:** Una API RESTful en PHP gestiona todos los datos del portfolio.
-- **Base de Datos Relacional:** MySQL (en Hostinger) almacena toda la información de proyectos, perfil y contenido.
-- **Contenido 100% Administrable:** Todos los textos y proyectos se gestionan desde la base de datos.
-- **Soporte Multilingüe (ES/EN):** La API sirve contenido en español o inglés según se solicite.
-- **Diseño Responsive:** Adaptado para dispositivos móviles y de escritorio.
+- **Navegación Single Page Scroll:** Toda tu información visible en una sola vista continua. La barra de navegación incluye seguimiento de sección mediante scroll (`IntersectionObserver`) que resalta automáticamente la pestaña actual.
+- **Sin Base de Datos (Zero-Server Overhead):** Toda la información de tu perfil, proyectos, experiencia y habilidades está centralizada en un archivo local JSON. La web carga de inmediato (0ms) sin realizar peticiones de red iniciales ni mostrar pantallas de carga.
+- **Estética Oscura Premium:** Interfaz visual cuidada con una paleta de colores basada en tonos pizarra (*slate/midnight*), acentos modernos con gradientes rojos, tipografía elegante **Outfit** (Google Fonts) y efectos translúcidos de *glassmorphism*.
+- **Línea de Tiempo de Experiencia:** Sección integrada con un diseño interactivo vertical para detallar tus puestos de trabajo, estudios DAW y proyectos freelance.
+- **Soporte Multilingüe Integrado (ES/EN):** Traducción instantánea de toda la interfaz y del contenido con un solo clic, sin recargar el navegador.
+- **Diseño 100% Responsivo:** Totalmente adaptado para pantallas móviles, tablets y escritorios.
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
 
-### **Frontend**
-
-- React
-- Vite
-- CSS3
-
-### **Backend**
-
-- PHP
-- MySQL (con PDO)
-
-### **Base de Datos**
-
-- MySQL
+- **Frontend:** React (v19) + Vite (v7)
+- **Estilos:** Vanilla CSS (usando CSS Modules para evitar colisiones de nombres)
+- **Fuentes:** Google Fonts (Familia Outfit)
 
 ---
 
-## 🚀 Cómo Poner en Marcha el Proyecto
+## 📂 Estructura del Proyecto
 
-Sigue estos pasos para levantar el proyecto en tu entorno local.
+El proyecto está simplificado para contener únicamente el frontend estático:
+```text
+Portfolio-app-web/
+└── frontend/
+    ├── index.html
+    ├── src/
+    │   ├── App.jsx             # Estructura de la SPA e importación de secciones
+    │   ├── data.json           # Base de datos local (textos, proyectos, experiencia)
+    │   ├── index.css           # Estilos y variables CSS globales (temas y tipografía)
+    │   ├── components/         # Componentes comunes (Header, Footer)
+    │   ├── pages/              # Secciones principales (Home, About, Experience, Projects, Skills, Contact)
+    │   └── hooks/              # Funciones auxiliares personalizadas (useTypewriter)
+    └── package.json
+```
+
+---
+
+## 🚀 Cómo Poner en Marcha el Proyecto Localmente
+
+Sigue estos sencillos pasos para levantar el entorno de desarrollo local. No necesitas instalar Docker, PHP ni MySQL, ya que el proyecto es 100% estático.
 
 ### **Prerrequisitos**
 
-- Tener instalado [Node.js](https://nodejs.org/) y npm.
-- Tener un servidor local como XAMPP o un entorno LAMP en Linux (PHP y MySQL).
-- Tener `git` instalado.
+* Tener instalado [Node.js](https://nodejs.org/) (versión v18 o superior recomendada).
 
-### **Instalación**
+### **Instalación y Configuración**
 
-1.  **Clona el repositorio.**
-2.  **Configura el Backend:**
-    - Crea una base de datos MySQL.
-    - Importa el archivo `.sql` para crear la estructura y poblar los datos.
-    - En la carpeta `backend`, renombra `config.example.php` a `config.php` y rellena tus credenciales de la base de datos.
-3.  **Instala las dependencias del Frontend:**
-    ```sh
-    cd frontend
-    npm install
-    ```
+1. **Clona el repositorio** en tu ordenador.
+2. **Accede a la carpeta del frontend**:
+   ```sh
+   cd frontend
+   ```
+3. **Instala las dependencias**:
+   ```sh
+   npm install
+   ```
 
-### **Ejecución**
+### **Ejecución y Compilación**
 
-1.  **Asegúrate de que tu servidor web (Apache/MySQL) esté corriendo.**
-2.  **Inicia la aplicación del Frontend:**
-    - Abre una terminal en la carpeta `frontend`.
-    - Ejecuta `npm run dev`.
-    - La aplicación estará disponible en `http://localhost:5173`.
+* **Entorno de desarrollo local**:
+  ```sh
+  npm run dev
+  ```
+  La aplicación estará disponible de inmediato en la dirección local `http://localhost:5173`.
+  
+* **Generar el build estático para producción**:
+  ```sh
+  npm run build
+  ```
+  Esto creará una carpeta llamada `dist/` en la raíz del frontend que contiene el HTML, CSS y JS comprimidos. Esta carpeta está lista para ser subida de forma **100% gratuita** a plataformas como **Vercel, Netlify, GitHub Pages o Cloudflare Pages**.
 
 ---
 
-## 👤 Contacto
+## ✏️ Cómo Personalizar el Contenido
 
-- **Portfolio:** [maxi.seligmann.es](https://maxi.seligmann.es)
-- **LinkedIn:** https://www.linkedin.com/in/maximiliano-seligmann/
-- **GitHub:** [@mseligmann39](https://github.com/mseligmann39)
+Para añadir proyectos, cambiar tu correo, modificar las tecnologías o actualizar el texto de "Sobre mí", solo tienes que editar el archivo:
+📄 [frontend/src/data.json](file:///home/maxi/projects/Portfolio-app-web/frontend/src/data.json)
+
+El archivo está estructurado con bloques para inglés (`en`), español (`es`), información de perfil (`profile`), lista de habilidades (`skills`), proyectos (`projects`) e historial (`experience`). Las modificaciones que guardes allí se verán reflejadas instantáneamente en tu web.
